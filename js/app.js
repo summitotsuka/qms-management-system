@@ -1,67 +1,97 @@
-async function testBackend() {
+document.addEventListener(
+  'DOMContentLoaded',
+  initializeApp
+);
 
-  const resultElement = document.getElementById('result');
 
-  resultElement.textContent = 'Connecting to backend...';
+function initializeApp() {
 
-  try {
+  renderNavigation();
 
-    const response = await fetch(
-      CONFIG.API_URL + '?action=ping'
-    );
+  setupSidebar();
 
-    if (!response.ok) {
-      throw new Error(
-        `HTTP Error: ${response.status}`
+  navigateTo('dashboard');
+
+}
+
+
+function navigateTo(page) {
+
+  document
+    .querySelectorAll('.nav-item, .nav-subitem')
+    .forEach(item => {
+
+      item.classList.toggle(
+        'active',
+        item.dataset.page === page
       );
-    }
 
-    const result = await response.json();
+    });
 
-    console.log('Backend Response:', result);
 
-    if (result.success) {
+  switch (page) {
 
-      resultElement.innerHTML = `
-        <div class="success">
-          <h3>Backend Connected ✓</h3>
+    case 'dashboard':
 
-          <p>
-            <strong>Application:</strong>
-            ${result.data.app}
-          </p>
+      loadDashboard();
 
-          <p>
-            <strong>Version:</strong>
-            ${result.data.version}
-          </p>
+      break;
 
-          <p>
-            <strong>Server Time:</strong>
-            ${result.data.timestamp}
-          </p>
-        </div>
-      `;
 
-    } else {
+    default:
 
-      resultElement.innerHTML = `
-        <div class="error">
-          Backend Error:
-          ${result.message}
-        </div>
-      `;
-    }
+      loadComingSoon(page);
 
-  } catch (error) {
-
-    console.error(error);
-
-    resultElement.innerHTML = `
-      <div class="error">
-        <h3>Connection Error</h3>
-        <p>${error.message}</p>
-      </div>
-    `;
   }
+
+}
+
+
+function loadComingSoon(page) {
+
+  const content =
+    document.getElementById('pageContent');
+
+  content.innerHTML = `
+
+    <div class="empty-page">
+
+      <div class="empty-icon">
+        🚧
+      </div>
+
+      <h1>
+        ${page}
+      </h1>
+
+      <p>
+        This module is under development.
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+
+function setupSidebar() {
+
+  const toggle =
+    document.getElementById('sidebarToggle');
+
+  const sidebar =
+    document.getElementById('sidebar');
+
+  if (!toggle || !sidebar) return;
+
+  toggle.addEventListener(
+    'click',
+    () => {
+
+      sidebar.classList.toggle('collapsed');
+
+    }
+  );
+
 }
