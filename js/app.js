@@ -6,13 +6,12 @@ document.addEventListener(
 
 async function initializeApp() {
 
-  showSessionLoading();
-  
-  const token =
-    AUTH.getToken();
+  const token = AUTH.getToken();
 
-
+  // ไม่มี Session
   if (!token) {
+
+    hideSessionLoading();
 
     showLogin();
 
@@ -21,21 +20,21 @@ async function initializeApp() {
   }
 
 
+  // มี Session → ตรวจสอบกับ Backend
   try {
 
     const session =
       await API.post(
         'validateSession',
         {
-          token
+          token: token
         }
       );
 
 
-    setCurrentUser(
-      session
-    );
+    setCurrentUser(session);
 
+    hideSessionLoading();
 
     showApp();
 
@@ -48,6 +47,8 @@ async function initializeApp() {
 
 
     AUTH.clearSession();
+
+    hideSessionLoading();
 
     showLogin();
 
