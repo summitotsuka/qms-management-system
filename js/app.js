@@ -6,6 +6,8 @@ document.addEventListener(
 
 async function initializeApp() {
 
+  showSessionLoading();
+  
   const token =
     AUTH.getToken();
 
@@ -382,5 +384,40 @@ function setupSidebar() {
 
     }
   );
+
+}
+
+function showSessionLoading() {
+
+  const loading =
+    document.getElementById(
+      'sessionLoading'
+    );
+
+
+  if (loading) {
+
+    loading.style.display =
+      'flex';
+
+  }
+
+}
+
+
+function hideSessionLoading() {
+
+  const loading =
+    document.getElementById(
+      'sessionLoading'
+    );
+
+
+  if (loading) {
+
+    loading.style.display =
+      'none';
+
+  }
 
 }
