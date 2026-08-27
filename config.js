@@ -1,3 +1,3 @@
 const CONFIG = {
-  API_URL: 'ใส่ GAS Web App URL ของคุณตรงนี้'
+  API_URL: 'https://script.google.com/macros/s/AKfycbzJLxtSznc1ozR-UMLme7apjJyiCIkJnEpdsytZpZWD79NIAqWKJnFPXtdPXzZcZi-DIQ/exec'
 };
