@@ -25,6 +25,77 @@
 
 <body>
 
+<!-- =========================
+     LOGIN SCREEN
+========================== -->
+<div id="loginScreen" class="login-screen">
+
+  <div class="login-card">
+
+    <div class="login-logo">
+      IMS
+    </div>
+
+    <div class="login-title">
+      Integrated Management System
+    </div>
+
+    <div class="login-subtitle">
+      ISO 9001 / IATF 16949 / ISO 14001
+    </div>
+
+    <form id="loginForm">
+
+      <div class="login-field">
+        <label for="loginUsername">
+          Username
+        </label>
+
+        <input
+          type="text"
+          id="loginUsername"
+          autocomplete="username"
+          required
+        >
+      </div>
+
+
+      <div class="login-field">
+        <label for="loginPassword">
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="loginPassword"
+          autocomplete="current-password"
+          required
+        >
+      </div>
+
+
+      <div
+        id="loginError"
+        class="login-error"
+        hidden
+      ></div>
+
+
+      <button
+        type="submit"
+        id="loginButton"
+        class="login-button"
+      >
+        LOGIN
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
 <div class="app">
 
 
@@ -85,15 +156,13 @@
       <div class="user-area">
 
         <div>
-
-          <div>
-            Guest User
+          <div id="currentUsername">
+          Guest User
           </div>
 
-          <small>
-            Administrator
+          <small id="currentRole">
+          Not Logged In
           </small>
-
         </div>
 
         <div class="user-avatar">
