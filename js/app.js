@@ -129,6 +129,8 @@ function showApp() {
 
   setupSidebar();
 
+  setupLogout();
+
   navigateTo('dashboard');
 
 }
@@ -382,6 +384,68 @@ function setupSidebar() {
       sidebar.classList.toggle(
         'collapsed'
       );
+
+    }
+  );
+
+}
+
+function setupLogout() {
+
+  const logoutButton =
+    document.getElementById(
+      'logoutButton'
+    );
+
+
+  if (!logoutButton) {
+
+    return;
+
+  }
+
+
+  logoutButton.addEventListener(
+    'click',
+    async () => {
+
+      const confirmed =
+        confirm(
+          'Are you sure you want to logout?'
+        );
+
+
+      if (!confirmed) {
+
+        return;
+
+      }
+
+
+      logoutButton.disabled =
+        true;
+
+      logoutButton.textContent =
+        'Logging out...';
+
+
+      try {
+
+        await AUTH.logout();
+
+      } catch (error) {
+
+        console.error(
+          'Logout error:',
+          error
+        );
+
+
+        AUTH.clearSession();
+
+        window.location.reload();
+
+      }
 
     }
   );
